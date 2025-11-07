@@ -32,7 +32,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="{{ path('app_members') }}">
+						<a href="{{ path('app_members_index') }}">
 							<i class="fa-regular fa-user"></i>
 							Équipe
 						</a>
@@ -45,7 +45,7 @@
 				<header>
 					<div id="current-user"></div>
 					<div id="title-page">
-						<h1>Projets</h1>
+						<h1>{% block custom_title %}Projets{% endblock %}</h1>
 					</div>
 				</header>
 

@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MembersController!{% endblock %}
+{% block custom_title %}Membres
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<div id="content">
+		<table id="team-container">
+			<thead>
+				<tr>
+					<th>Prénom, Nom</th>
+					<th>Statut</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/chirdon/Documents/OpenClassrooms/tasklinker/src/Controller/MembersController.php</code></li>
-        <li>Your template at <code>/Users/chirdon/Documents/OpenClassrooms/tasklinker/templates/members/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
+				{% for member in members %}
+					<tr>
+						<td>
+							<div class="employee-infos">
+
+								{% set initials = member.firstname|first ~ member.lastname|first %}
+								<div class="employee-avatar" title="{{ member.firstname }} {{ member.lastname }}">
+									{{ initials|upper }}
+								</div>
+
+								<div class="employee-coords">
+									<strong>
+                                        {{ member.firstname}}
+										{{ member.lastname }}
+                                    </strong>
+									<span>{{ member.email}}</span>
+								</div>
+							</div>
+						</td>
+						<td>{{ member.status}}</td>
+						<td>
+							<a class="button button-edit-team" href="{{ path('app_members_edit', { id: member.id}) }}">
+								Éditer
+							</a>
+							<a class="delete-team" href="{{ path('app_members_delete', { id: member.id}) }}">
+								Supprimer
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</tbody>
+	</table>
+</div>{% endblock %}

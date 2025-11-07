@@ -28,8 +28,6 @@ class AppFixtures extends Fixture
             $users[] = $user;
         }
 
-
-
         $task1 = new Tasks();
         $task1->setTitle('Gestion des droits d\'accès');
         $task1->setDescription('Un employé ne peut accéder qu\'à ses projets');

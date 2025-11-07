@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Projects;
+use App\Entity\Tasks;
+use App\Entity\Users;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class TaskType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add(
+                'title',
+                TextType::class,
+                ['label' => 'Titre de la tâche']
+            )
+            ->add(
+                'description',
+                TextareaType::class,
+                ['label' => 'Description']
+            )
+
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'To Do' => 'To Do',
+                    'Doing' => 'Doing',
+                    'Done' => 'Done',
+                ],
+                'label' => 'Statut',
+            ])
+            ->add('members', EntityType::class, [
+                'class' => Users::class,
+                'choice_label' => function ($user) {
+                    return $user->getLastname() . ' ' . $user->getFirstname();
+                },
+                'multiple' => true,
+                'label' => 'Membres',
+            ]);
+
+        if (!$options['is_edit']) {
+            $builder
+
+                ->add('date', DateType::class, [
+                    'widget' => 'single_text',
+                    'label' => 'Date',
+                ]);
+        }
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Tasks::class,
+            'is_edit' => false
+        ]);
+    }
+}

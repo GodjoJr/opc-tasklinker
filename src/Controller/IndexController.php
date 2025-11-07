@@ -13,7 +13,15 @@ final class IndexController extends AbstractController
     public function index(ProjectsRepository $projectsRepository): Response
     {
 
-        $projects = $projectsRepository->findAll();
+        $all_projects = $projectsRepository->findAll();
+
+        $projects = [];
+
+        foreach ($all_projects as $project) {
+            if (!$project->isArchived()) {
+                $projects[] = $project;
+            }
+        }
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
             'projects' => $projects
