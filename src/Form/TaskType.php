@@ -22,12 +22,12 @@ class TaskType extends AbstractType
             ->add(
                 'title',
                 TextType::class,
-                ['label' => 'Titre de la tâche']
+                ['label' => 'Titre de la tâche', 'required' => true]
             )
             ->add(
                 'description',
                 TextareaType::class,
-                ['label' => 'Description']
+                ['label' => 'Description', 'required' => true]
             )
 
             ->add('status', ChoiceType::class, [
@@ -37,6 +37,7 @@ class TaskType extends AbstractType
                     'Done' => 'Done',
                 ],
                 'label' => 'Statut',
+                'required' => true
             ])
             ->add('members', EntityType::class, [
                 'class' => Users::class,
@@ -45,6 +46,7 @@ class TaskType extends AbstractType
                 },
                 'multiple' => true,
                 'label' => 'Membres',
+                'required' => true
             ]);
 
         if (!$options['is_edit']) {
@@ -53,6 +55,7 @@ class TaskType extends AbstractType
                 ->add('date', DateType::class, [
                     'widget' => 'single_text',
                     'label' => 'Date',
+                    'required' => true
                 ]);
         }
     }

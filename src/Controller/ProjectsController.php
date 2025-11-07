@@ -6,6 +6,7 @@ use App\Entity\Projects;
 use App\Entity\Tasks;
 use App\Form\ProjectType;
 use Doctrine\ORM\EntityManagerInterface;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,7 +63,7 @@ final class ProjectsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($project);
             $em->flush();
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_projects_show', ['id' => $project->getId()]);
         }
 
         return $this->render('projects/add.html.twig', [
@@ -72,11 +73,21 @@ final class ProjectsController extends AbstractController
     }
 
 
-    #[Route('/edit', name: 'edit')]
-    public function edit(): Response
+    #[Route('/edit/{id}', name: 'edit')]
+    public function edit(int $id, Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('projects/index.html.twig', [
-            'controller_name' => 'ProjectsController',
+        $project = $em->getRepository(Projects::class)->find($id);
+        $form = $this->createForm(ProjectType::class, $project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($project);
+            $em->flush();
+            return $this->redirectToRoute('app_projects_show', ['id' => $project->getId()]);
+        }
+
+        return $this->render('projects/edit.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

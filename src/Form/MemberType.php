@@ -19,16 +19,16 @@ class MemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('lastname', TextType::class, ['label' => 'Nom'])
-            ->add('firstname', TextType::class, ['label' => 'Prénom'])
-            ->add('email', EmailType::class, ['label' => 'Email'])
-            ->add('entry_date', DateType::class, ['label' => 'Date d\'entrée', 'widget' => 'single_text'])
+            ->add('lastname', TextType::class, ['label' => 'Nom', 'required' => true])
+            ->add('firstname', TextType::class, ['label' => 'Prénom', 'required' => true])
+            ->add('email', EmailType::class, ['label' => 'Email', 'required' => true])
+            ->add('entry_date', DateType::class, ['label' => 'Date d\'entrée', 'widget' => 'single_text', 'required' => true])
             ->add('status', ChoiceType::class, [
                 'choices' => [
                     'CDI' => 'CDI',
                     'CDD' => 'CDD',
                     'Stagiaire' => 'Stagiaire',
-                ]
+                ], 'required' => true
             ]);
     }
 
