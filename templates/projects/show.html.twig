@@ -1,6 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block custom_title %}{{ project.title }}
+{% block custom_title %}
+	<div class="flex-header">
+		<h1>
+			{{ project.title }}
+		</h1>
+		<div class="user-list">
+			{% for member in project.members %}
+				{% set initials = member.firstname|first ~ member.lastname|first %}
+				<div class="avatar" title="{{ member.firstname }} {{ member.lastname }}">
+					{{ initials|upper }}
+				</div>
+			{% endfor %}
+		</div>
+		<a class="button" href="{{ path('app_projects_edit', { id: project.id}) }}">Modifier</a>
+	</div>
+
 {% endblock %}
 
 {% block body %}

@@ -28,7 +28,8 @@ class MemberType extends AbstractType
                     'CDI' => 'CDI',
                     'CDD' => 'CDD',
                     'Stagiaire' => 'Stagiaire',
-                ], 'required' => true
+                ],
+                'required' => true,
             ]);
     }
 

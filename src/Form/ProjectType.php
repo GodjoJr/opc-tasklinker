@@ -23,7 +23,8 @@ class ProjectType extends AbstractType
                 },
                 'multiple' => true,
                 'label' => 'Membres',
-                'required' => true
+                'required' => true,
+                'autocomplete' => true
             ]);
         ;
     }

@@ -37,7 +37,9 @@ class TaskType extends AbstractType
                     'Done' => 'Done',
                 ],
                 'label' => 'Statut',
-                'required' => true
+                'required' => true,
+                'autocomplete' => true
+
             ])
             ->add('members', EntityType::class, [
                 'class' => Users::class,
@@ -46,12 +48,13 @@ class TaskType extends AbstractType
                 },
                 'multiple' => true,
                 'label' => 'Membres',
-                'required' => true
+                'required' => true,
+                'autocomplete' => true
+
             ]);
 
         if (!$options['is_edit']) {
             $builder
-
                 ->add('date', DateType::class, [
                     'widget' => 'single_text',
                     'label' => 'Date',
