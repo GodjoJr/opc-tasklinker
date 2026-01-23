@@ -8,9 +8,17 @@ use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -22,7 +30,9 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setEntryDate($faker->dateTimeBetween('-6 months'));
             $user->setStatus('CDI');
-
+            $user->setPassword(
+                $this->passwordHasher->hashPassword($user, 'password123')
+            );
             $manager->persist($user);
 
             $users[] = $user;

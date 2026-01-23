@@ -25,13 +25,11 @@
 					<img src="{{ asset('img/logo.png') }}" alt="Logo TaskLinker"/>
 				</a>
 				<ul id="main-menu">
-					<li class="
-																{% set currentRoute = app.request.get('_route') %}
-																{% if currentRoute starts with 'app_index'
-																	or currentRoute starts with 'app_project'
-																	or currentRoute starts with 'app_task'
-																%}active{% endif %}
-															">
+					<li class="{% set currentRoute = app.request.get('_route') %}
+					{% if currentRoute starts with 'app_index' 
+					or currentRoute starts with 'app_project' 
+					or currentRoute starts with 'app_task' %}
+					active{% endif %} ">
 						<a href="{{ path('app_index') }}">
 							<i class="fa-solid fa-list-check"></i>
 							Projets
