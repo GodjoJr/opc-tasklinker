@@ -192,6 +192,8 @@ div#projects-container {
     margin-left: -12px;
     background: #1C5B50;
     border: 1px solid lightgray;
+    color: #fff;
+    text-decoration: none;
 }
 
 .user-list {
@@ -533,4 +535,177 @@ form .select2-container--default .select2-selection--multiple .select2-selection
         border-radius: 0;
         padding: 13px;
     }
+}
+
+.auth-pages {
+    background-color: #1f5b5064;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    height: 155px;
+    padding: 30px 80px 10px 80px;
+}
+
+.auth-container {
+    background-color: #4D8077;
+    padding: 100px;
+    border-radius: 30px;
+    min-width: 640px;
+}
+.auth-container  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.auth-container .content h1 {
+    text-align: center;
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.auth-container .content h2 {
+    text-align: center;
+    color: #FFF;
+    font-size: 22px;
+    font-weight: 200;
+    line-height: 36px;
+    text-align: center;
+    margin-bottom: 80px;
+    margin-top: 0;
+
+}
+
+.auth-container .content p {
+    text-align: center;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.auth-container .content .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+}
+
+.auth-container .content .buttons .auth-button {
+    background: #1F5B50;
+    border-radius: 10px;
+    font-family: Manrope;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    justify-content: center;
+    border: none;
+    color: #ffffff;
+    padding: 15px 40px;
+    height: 70px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-decoration: none;
+    width: 250px;
+}
+
+.auth-container .content .buttons .auth-button.signup {
+    background: #B1D89D;
+    color: #1F5B50;
+}
+
+.auth-container .content .buttons span {
+    position: relative;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    justify-content: center;
+    border: none;
+    color: #ffffff;
+}
+
+.auth-container .content .buttons span:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 10px);
+    width: 150px;
+    height: 1px;
+    background-color: #fff;
+}
+
+.auth-container .content .buttons span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 10px);
+    width: 150px;
+    height: 1px;
+    background-color: #fff;
+}
+
+.auth-container button[type="submit"] {
+    background: #1F5B50;
+    border-radius: 10px;
+    font-family: Manrope;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    justify-content: center;
+    border: none;
+    color: #ffffff;
+    padding: 15px 40px;
+    height: 70px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.auth-container label {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.auth-container .redirect {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.auth-container p:has(.redirect) {
+    margin-top: 20px;
 }

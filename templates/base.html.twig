@@ -25,11 +25,7 @@
 					<img src="{{ asset('img/logo.png') }}" alt="Logo TaskLinker"/>
 				</a>
 				<ul id="main-menu">
-					<li class="{% set currentRoute = app.request.get('_route') %}
-					{% if currentRoute starts with 'app_index' 
-					or currentRoute starts with 'app_project' 
-					or currentRoute starts with 'app_task' %}
-					active{% endif %} ">
+					<li class="{% set currentRoute = app.request.get('_route') %} {% if currentRoute starts with 'app_index' or currentRoute starts with 'app_project' or currentRoute starts with 'app_task' %} active{% endif %} ">
 						<a href="{{ path('app_index') }}">
 							<i class="fa-solid fa-list-check"></i>
 							Projets
@@ -52,16 +48,27 @@
 					<div id="current-user"></div>
 					<div id="title-page">
 						{% block custom_title %}
-							<h1>
-								Projets
-							</h1>
-						{% endblock %}
-					</div>
-				</header>
+							<div class="flex-header">
+								<h1>
+									Projets
+								</h1>
 
-				{% block body %}{% endblock %}
+								<div class="user-list">
+									{% if app.user %}
+										{% set initials = app.user.firstname|first ~ app.user.lastname|first %}
+										<a href="{{ path('app_auth_logout') }}" class="avatar" title="{{ app.user.firstname }} {{ app.user.lastname }}">
+											{{ initials|upper }}
+							</a>
+									{% endif %}
+								</div>
+							{% endblock %}
+						</div>
+					</header>
 
-			</main>
-		</div>
+					{% block body %}{% endblock %}
+
+				</main>
+			</div>
+		</body>
 	</body>
 </html>

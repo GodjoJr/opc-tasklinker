@@ -38,7 +38,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-        public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_USER = 'ROLE_USER';
     public const ROLE_MANAGER = 'ROLE_MANAGER';
     public const ROLE_ADMIN = 'ROLE_ADMIN';
 

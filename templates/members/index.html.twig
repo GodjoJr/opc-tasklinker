@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block custom_title %}
-<h1>
-	Membres
-</h1>
+	<h1>
+		Membres 
+	</h1>
 {% endblock %}
 
 {% block body %}
@@ -31,22 +31,22 @@
 
 								<div class="employee-coords">
 									<strong>
-                                        {{ member.firstname}}
+										{{ member.firstname}}
 										{{ member.lastname }}
-                                    </strong>
+									</strong>
 									<span>{{ member.email}}</span>
 								</div>
 							</div>
 						</td>
 						<td>{{ member.status}}</td>
-						<td>
-							<a class="button button-edit-team" href="{{ path('app_members_edit', { id: member.id}) }}">
-								Éditer
-							</a>
-							<a class="delete-team" href="{{ path('app_members_delete', { id: member.id}) }}">
-								Supprimer
-							</a>
-						</td>
+							<td>
+								<a class="button button-edit-team" href="{{ path('app_members_edit', { id: member.id}) }}">
+									Éditer
+								</a>
+								<a class="delete-team" href="{{ path('app_members_delete', { id: member.id}) }}">
+									Supprimer
+								</a>
+							</td>
 					</tr>
 				{% endfor %}
 			</tbody>

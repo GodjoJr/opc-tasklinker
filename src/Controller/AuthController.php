@@ -42,6 +42,7 @@ final class AuthController extends AbstractController
             );
             $user->setEntryDate(new \DateTime());
             $user->setRoles([Users::ROLE_USER]);
+            $user->setStatus('CDI');
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute('app_auth_index');

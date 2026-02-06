@@ -1,13 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-auth.html.twig' %}
 
 {% block title %}Hello AuthController!
 {% endblock %}
 
 {% block body %}
-<div id="content">
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Créer mon compte</button>
-    {{ form_end(form) }}
-</div>
+	<div class="content">
+		<h1>S'inscrire</h1>
+		{{ form_start(form) }}
+		<div>{{ form_row(form.lastname) }}</div>
+		<div>{{ form_row(form.firstname) }}</div>
+		<div>{{ form_row(form.email) }}</div>
+		<div>{{ form_row(form.plainPassword) }}</div>
+             {{ form_row(form._token) }}
+		<button type="submit" class="btn btn-primary">Créer mon compte</button>
+		{{ form_end(form, { render_rest: false }) }}
+
+		<p>Déjà un compte ?
+			<a class="redirect" href="{{ path('app_auth_login') }}">Se connecter</a>
+		</p>
+
+	</div>
 {% endblock %}

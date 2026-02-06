@@ -29,18 +29,10 @@ class RegistrationFormType extends AbstractType
                     'CDD' => 'CDD',
                     'Stagiaire' => 'Stagiaire',
                 ],
-                'required' => true,
+                'required' => false,
             ])
             ->add('email', null, ['constraints' => new NotBlank()])
-            ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'J\'accepte les conditions d\'utilisation',
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Veuillez accepter les conditions d\'utilisation.',
-                    ]),
-                ],
-            ])
+
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
