@@ -559,12 +559,14 @@ form .select2-container--default .select2-selection--multiple .select2-selection
     border-radius: 30px;
     min-width: 640px;
 }
-.auth-container  .content {
+
+.auth-container .content {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .auth-container .content h1 {
     text-align: center;
     color: #FFF;
@@ -708,4 +710,18 @@ form .select2-container--default .select2-selection--multiple .select2-selection
 
 .auth-container p:has(.redirect) {
     margin-top: 20px;
+}
+
+.logout {
+    display: flex;
+    flex: 1;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    justify-content: flex-end;
+}
+
+.logout a {
+    background-color: #DCFDAD;
+    color: #1C5B50;
 }

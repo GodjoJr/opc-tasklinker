@@ -1,25 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block custom_title %}
-<h1>
-	Modifier un membre
-</h1>
+	<div class="flex-header">
+		<h1>
+			Modifier un membre
+		</h1>
+
+		<div class="logout">
+			{% if app.user %}
+				{% set initials = app.user.firstname|first ~ app.user.lastname|first %}
+				<a href="{{ path('app_auth_logout') }}" class="avatar" title="{{ app.user.firstname }} {{ app.user.lastname }}">
+					{{ initials|upper }}
+				</a>
+			{% endif %}
+		</div>
+	</div>
+
 {% endblock %}
 
 {% block body %}
 
 	<div id="content">
 		{{ form_start(form) }}
-			<div>{{ form_row(form.lastname) }}</div>
-			<div>{{ form_row(form.firstname) }}</div>
-			<div>{{ form_row(form.email) }}</div>
-				
-			<div class="form-flex">
-				<div>{{ form_row(form.entry_date) }}</div>
-				<div>{{ form_row(form.status) }}</div>
-			</div>
+		<div>{{ form_row(form.lastname) }}</div>
+		<div>{{ form_row(form.firstname) }}</div>
+		<div>{{ form_row(form.email) }}</div>
 
-			<button class="button button-submit">Enregistrer</button>
+		<div class="form-flex">
+			<div>{{ form_row(form.entry_date) }}</div>
+			<div>{{ form_row(form.status) }}</div>
+		</div>
+
+			<div>{{ form_row(form.roles) }}</div>
+
+		<button class="button button-submit">Enregistrer</button>
 		{{ form_end(form) }}
 	</div>
 {% endblock %}

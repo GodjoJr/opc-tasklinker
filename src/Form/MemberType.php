@@ -30,6 +30,15 @@ class MemberType extends AbstractType
                     'Stagiaire' => 'Stagiaire',
                 ],
                 'required' => true,
+            ])
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'User' => 'ROLE_USER',
+                    'Manager' => 'ROLE_MANAGER',
+                    'Admin' => 'ROLE_ADMIN',
+                ],
+                'expanded' => false,
+                'multiple' => true,
             ]);
     }
 

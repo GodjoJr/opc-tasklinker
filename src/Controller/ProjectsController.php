@@ -11,7 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 #[Route('/projects', name: 'app_projects_')]
 final class ProjectsController extends AbstractController
 {
@@ -23,6 +25,14 @@ final class ProjectsController extends AbstractController
 
         if (!$project) {
             throw $this->createNotFoundException('Projet' . $id . 'non trouvé.');
+        }
+
+        if (
+            !in_array('ROLE_MANAGER', $this->getUser()->getRoles(), true)
+            && !in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)
+            && !$project->getMembers()->contains($this->getUser())
+        ) {
+            throw $this->createAccessDeniedException('Accès refusé à ce projet.');
         }
 
         $all_tasks = $em->getRepository(Tasks::class)->findBy(['projects' => $id]);
@@ -51,6 +61,7 @@ final class ProjectsController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/add', name: 'add')]
     public function add(Request $request, EntityManagerInterface $em): Response
     {
@@ -73,10 +84,22 @@ final class ProjectsController extends AbstractController
     }
 
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(int $id, Request $request, EntityManagerInterface $em): Response
     {
+
+
         $project = $em->getRepository(Projects::class)->find($id);
+
+        if (
+            !in_array('ROLE_MANAGER', $this->getUser()->getRoles(), true)
+            && !in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)
+            && !$project->getMembers()->contains($this->getUser())
+        ) {
+            throw $this->createAccessDeniedException('Accès refusé à ce projet.');
+        }
+
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
@@ -91,11 +114,19 @@ final class ProjectsController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/archive/{id}', name: 'archive')]
     public function archive(int $id, EntityManagerInterface $em): Response
     {
-
         $project = $em->getRepository(Projects::class)->find($id);
+
+        if (
+            !in_array('ROLE_MANAGER', $this->getUser()->getRoles(), true)
+            && !in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)
+            && !$project->getMembers()->contains($this->getUser())
+        ) {
+            throw $this->createAccessDeniedException('Accès refusé à ce projet.');
+        }
 
         if (!$project) {
             throw $this->createNotFoundException('Projet' . $id . 'non rencontré.');

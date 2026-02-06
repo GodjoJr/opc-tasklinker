@@ -11,7 +11,9 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 #[Route('/members', name: 'app_members_')]
 final class MembersController extends AbstractController
 {
@@ -27,6 +29,7 @@ final class MembersController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(int $id, Request $request, EntityManagerInterface $em): Response
     {
@@ -39,7 +42,7 @@ final class MembersController extends AbstractController
             throw $this->createNotFoundException('Membre ' . $id . ' non trouvé.');
         }
 
-        if (in_array('ROLE_ADMIN', $member->getRoles(), true)) {
+        if (in_array('ROLE_ADMIN', $member->getRoles(), true) && $user->getId() !== $member->getId()) {
             throw $this->createAccessDeniedException('Vous ne pouvez pas modifier un administrateur.');
         }
 
@@ -61,6 +64,7 @@ final class MembersController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/delete/{id}', name: 'delete')]
     public function delete(int $id, EntityManagerInterface $em, Security $security): Response
     {

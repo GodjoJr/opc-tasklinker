@@ -53,22 +53,23 @@
 									Projets
 								</h1>
 
-								<div class="user-list">
+								<div class="logout">
 									{% if app.user %}
 										{% set initials = app.user.firstname|first ~ app.user.lastname|first %}
 										<a href="{{ path('app_auth_logout') }}" class="avatar" title="{{ app.user.firstname }} {{ app.user.lastname }}">
 											{{ initials|upper }}
-							</a>
+										</a>
 									{% endif %}
 								</div>
-							{% endblock %}
-						</div>
-					</header>
+							</div>
 
-					{% block body %}{% endblock %}
+						{% endblock %}
+					</div>
+				</header>
 
-				</main>
-			</div>
-		</body>
+				{% block body %}{% endblock %}
+
+			</main>
+		</div>
 	</body>
-</html>
+</html></body></html>

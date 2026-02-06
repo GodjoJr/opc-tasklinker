@@ -1,31 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block custom_title %}
-<h1>
-	Ajouter une tâche
-</h1>
-{% endblock %}
+	<div class="flex-header">
+		<h1>
+			Ajouter une tâche
+		</h1>
 
-{% block body %}
-	<div id="content">
-
-		{{ form_start(form) }}
-
-		<div>{{ form_row(form.title) }}<div>
-
-        <div>{{ form_row(form.description) }}</div>
-
-        <div>{{ form_row(form.date) }}</div>
-
-        <div class="flex-form">
-			<div>{{ form_row(form.status) }}</div>
+		<div class="logout">
+			{% if app.user %}
+				{% set initials = app.user.firstname|first ~ app.user.lastname|first %}
+				<a href="{{ path('app_auth_logout') }}" class="avatar" title="{{ app.user.firstname }} {{ app.user.lastname }}">
+					{{ initials|upper }}
+				</a>
+			{% endif %}
 		</div>
+	</div>
 
-		<div>{{ form_row(form.members) }}</div>
+	{% endblock %}
 
-		<button class="button button-submit">Ajouter</button>
+	{% block body %}
+		<div id="content">
 
-		{{ form_end(form)}}
-        
-    </div>
-{% endblock %}
+			{{ form_start(form) }}
+
+			<div>{{ form_row(form.title) }}<div>
+
+					<div>{{ form_row(form.description) }}</div>
+
+					<div>{{ form_row(form.date) }}</div>
+
+					<div class="flex-form">
+						<div>{{ form_row(form.status) }}</div>
+					</div>
+
+					<div>{{ form_row(form.members) }}</div>
+
+					<button class="button button-submit">Ajouter</button>
+
+					{{ form_end(form)}}
+
+				</div>
+			{% endblock %}

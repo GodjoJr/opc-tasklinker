@@ -1,31 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block custom_title %}
-<h1>
-	Modifier une tâche
-</h1>
-{% endblock %}
+	<div class="flex-header">
+		<h1>
+			Modifier une tâche
+		</h1>
 
-{% block body %}
-	<div id="content">
-
-		{{ form_start(form) }}
-
-		<div>{{ form_row(form.title) }}<div>
-
-        <div>{{ form_row(form.description) }}</div>
-
-        <div class="flex-form">
-			<div>{{ form_row(form.status) }}</div>
+		<div class="logout">
+			{% if app.user %}
+				{% set initials = app.user.firstname|first ~ app.user.lastname|first %}
+				<a href="{{ path('app_auth_logout') }}" class="avatar" title="{{ app.user.firstname }} {{ app.user.lastname }}">
+					{{ initials|upper }}
+				</a>
+			{% endif %}
 		</div>
+	</div>
 
-		<div>{{ form_row(form.members) }}</div>
+	{% endblock %}
 
-		<button class="button button-submit">Modifier</button>
+	{% block body %}
+		<div id="content">
 
-		<a href="{{ path('app_tasks_delete', { id: id }) }}" class="delete-task">Supprimer la tâche</a>
+			{{ form_start(form) }}
 
-		{{ form_end(form)}}
-        
-    </div>
-{% endblock %}
+			<div>{{ form_row(form.title) }}<div>
+
+					<div>{{ form_row(form.description) }}</div>
+
+					<div class="flex-form">
+						<div>{{ form_row(form.status) }}</div>
+					</div>
+
+					<div>{{ form_row(form.members) }}</div>
+
+					<button class="button button-submit">Modifier</button>
+
+					<a href="{{ path('app_tasks_delete', { id: id }) }}" class="delete-task">Supprimer la tâche</a>
+
+					{{ form_end(form)}}
+
+				</div>
+			{% endblock %}

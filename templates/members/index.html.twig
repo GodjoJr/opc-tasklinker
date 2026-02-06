@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block custom_title %}
-	<h1>
-		Membres 
-	</h1>
+	<div class="flex-header">
+		<h1>
+			Membres
+		</h1>
+
+		<div class="logout">
+			{% if app.user %}
+				{% set initials = app.user.firstname|first ~ app.user.lastname|first %}
+				<a href="{{ path('app_auth_logout') }}" class="avatar" title="{{ app.user.firstname }} {{ app.user.lastname }}">
+					{{ initials|upper }}
+				</a>
+			{% endif %}
+		</div>
+	</div>
+
 {% endblock %}
 
 {% block body %}
@@ -39,14 +51,14 @@
 							</div>
 						</td>
 						<td>{{ member.status}}</td>
-							<td>
-								<a class="button button-edit-team" href="{{ path('app_members_edit', { id: member.id}) }}">
-									Éditer
-								</a>
-								<a class="delete-team" href="{{ path('app_members_delete', { id: member.id}) }}">
-									Supprimer
-								</a>
-							</td>
+						<td>
+							<a class="button button-edit-team" href="{{ path('app_members_edit', { id: member.id}) }}">
+								Éditer
+							</a>
+							<a class="delete-team" href="{{ path('app_members_delete', { id: member.id}) }}">
+								Supprimer
+							</a>
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>

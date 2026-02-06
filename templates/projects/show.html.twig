@@ -14,6 +14,15 @@
 			{% endfor %}
 		</div>
 		<a class="button" href="{{ path('app_projects_edit', { id: project.id}) }}">Modifier</a>
+
+		<div class="logout">
+			{% if app.user %}
+				{% set initials = app.user.firstname|first ~ app.user.lastname|first %}
+				<a href="{{ path('app_auth_logout') }}" class="avatar" title="{{ app.user.firstname }} {{ app.user.lastname }}">
+					{{ initials|upper }}
+				</a>
+			{% endif %}
+		</div>
 	</div>
 
 {% endblock %}
@@ -23,11 +32,11 @@
 	<div id="content">
 		<div id="tasks-container">
 
-			{% if(tasks['todo'] is defined) %}
-				<div class="task-column">
+			<div class="task-column">
 
-					<h2>To Do</h2>
+				<h2>To Do</h2>
 
+				{% if(tasks['todo'] is defined) %}
 					<div class="tasks-list">
 
 						{% for task in tasks['todo'] %}
@@ -48,21 +57,23 @@
 								</div>
 							</a>
 						{% endfor %}
+					{% endif %}
 
-						<a href="{{ path('app_tasks_add', { id: project.id}) }}" class="task-add">
-							+ Ajouter une tâche
-						</a>
+					<a href="{{ path('app_tasks_add', { id: project.id}) }}" class="task-add">
+						+ Ajouter une tâche
+					</a>
 
+									{% if(tasks['todo'] is defined) %}
 					</div>
+				{% endif %}
 
-				</div>
-			{% endif %}
+			</div>
 
-			{% if(tasks['doing'] is defined) %}
-				<div class="task-column">
+			<div class="task-column">
 
-					<h2>Doing</h2>
+				<h2>Doing</h2>
 
+				{% if(tasks['doing'] is defined) %}
 					<div class="tasks-list">
 
 						{% for task in tasks['doing'] %}
@@ -83,21 +94,24 @@
 								</div>
 							</a>
 						{% endfor %}
+					{% endif %}
 
-						<a href="{{ path('app_tasks_add', { id: project.id}) }}" class="task-add">
-							+ Ajouter une tâche
-						</a>
+					<a href="{{ path('app_tasks_add', { id: project.id}) }}" class="task-add">
+						+ Ajouter une tâche
+					</a>
 
+					{% if(tasks['doing'] is defined) %}
 					</div>
+				{% endif %}
 
-				</div>
-			{% endif %}
 
-			{% if(tasks['done'] is defined) %}
-				<div class="task-column">
+			</div>
 
-					<h2>Done</h2>
+			<div class="task-column">
 
+				<h2>Done</h2>
+
+				{% if(tasks['done'] is defined) %}
 					<div class="tasks-list">
 
 						{% for task in tasks['done'] %}
@@ -118,15 +132,17 @@
 								</div>
 							</a>
 						{% endfor %}
+					{% endif %}
 
-						<a href="{{ path('app_tasks_add', { id: project.id}) }}" class="task-add">
-							+ Ajouter une tâche
-						</a>
+					<a href="{{ path('app_tasks_add', { id: project.id}) }}" class="task-add">
+						+ Ajouter une tâche
+					</a>
 
+									{% if(tasks['done'] is defined) %}
 					</div>
+				{% endif %}
 
-				</div>
-			{% endif %}
+			</div>
 
 		</div>
 	</div>
